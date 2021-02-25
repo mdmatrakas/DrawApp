@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import edu.udc.drawapp.model.*;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -52,7 +55,7 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmPoint = new JMenuItem("Ponto");
 		mntmPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(1);
+				contentPane.desenharTipo(new Point(-1, -1));
 			}
 		});
 		mnGeometrias.add(mntmPoint);
@@ -60,7 +63,7 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmLine = new JMenuItem("Linha");
 		mntmLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(2);
+				contentPane.desenharTipo(new Line(new Point(-1, -1), new Point(-1, -1)));
 			}
 		});
 		mnGeometrias.add(mntmLine);
@@ -68,7 +71,7 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmCircle = new JMenuItem("Circulo");
 		mntmCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(3);
+				contentPane.desenharTipo(new Circle(new Point(-1, -1), 0));
 			}
 		});
 		mnGeometrias.add(mntmCircle);
@@ -76,7 +79,8 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmRectangle = new JMenuItem("Retângulo");
 		mntmRectangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(4);
+				contentPane.desenharTipo(new Rectangle(new Point(-1, -1), new Point(-1, -1), 
+						new Point(-1, -1), new Point(-1, -1)));
 			}
 		});
 		mnGeometrias.add(mntmRectangle);
@@ -84,11 +88,10 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmTriangle = new JMenuItem("Triângulo");
 		mntmTriangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(5);
+				contentPane.desenharTipo(new Triangle(new Point(-1, -1), new Point(-1, -1), 
+						new Point(-1, -1)));
 			}
 		});
-		mnGeometrias.add(mntmTriangle);
-		
+		mnGeometrias.add(mntmTriangle);		
 	}
-
 }

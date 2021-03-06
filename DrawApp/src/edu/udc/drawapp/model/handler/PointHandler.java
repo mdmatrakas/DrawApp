@@ -17,9 +17,10 @@ public class PointHandler implements ShapeHandler {
 	}
 
 	@Override
-	public void mouseClick(int x, int y) {
+	public boolean mouseClick(int x, int y) {
 		point.x = x;
 		point.y = y;
+		return true;
 	}
 
 	@Override

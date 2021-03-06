@@ -21,4 +21,13 @@ public class Rectangle implements Shape {
 		return new RectangleHandler(this);
 	}
 
+	@Override
+	public Rectangle clone() {
+		return new Rectangle(a.clone(), b.clone(), c.clone(), d.clone());
+	}
+
+	@Override
+	public String toString() {
+		return "Rectangle [a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + "]";
+	}
 }

@@ -25,4 +25,14 @@ public class Point implements Shape {
 		return new PointHandler(this);
 	}
 
+	
+	@Override
+	public Point clone() {
+		return new Point(x, y);
+	}
+
+	@Override
+	public String toString() {
+		return "Point [x=" + x + ", y=" + y + "]";
+	}
 }

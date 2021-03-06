@@ -26,19 +26,20 @@ public class CircleHandler implements ShapeHandler {
 	}
 
 	@Override
-	public void mouseClick(int x, int y) {
+	public boolean mouseClick(int x, int y) {
 		switch(state) {
 		case 0:
 			circle.center.x = x;
 			circle.center.y = y;
 			circle.radius = 0F;
 			state = 1;
-			break;
+			return false;
 		case 1:
 			circle.radius = circle.center.distance(x, y);
 			state = 0;
-			break;
+			return true;
 		}
+		return false;
 	}
 
 	@Override

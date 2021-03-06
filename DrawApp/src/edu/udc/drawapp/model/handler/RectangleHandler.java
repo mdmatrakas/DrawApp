@@ -40,7 +40,7 @@ public class RectangleHandler implements ShapeHandler {
 	}
 
 	@Override
-	public void mouseClick(int x, int y) {
+	public boolean mouseClick(int x, int y) {
 		switch(state) {
 		case 0:
 			rectangle.a.x = x;
@@ -52,23 +52,24 @@ public class RectangleHandler implements ShapeHandler {
 			rectangle.d.x = x;
 			rectangle.d.y = y;
 			state = 1;
-			break;
+			return false;
 		case 1:
 			rectangle.b.x = x;
 			rectangle.b.y = y;
 			state = 2;
-			break;
+			return false;
 		case 2:
 			rectangle.c.x = x;
 			rectangle.c.y = y;
 			state = 3;
-			break;
+			return false;
 		case 3:
 			rectangle.d.x = x;
 			rectangle.d.y = y;
 			state = 0;
-			break;
+			return true;
 		}
+		return false;
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class LineHandler implements ShapeHandler {
 	}
 
 	@Override
-	public void mouseClick(int x, int y) {
+	public boolean mouseClick(int x, int y) {
 		switch(state) {
 		case 0:
 			line.a.x = x;
@@ -37,15 +37,14 @@ public class LineHandler implements ShapeHandler {
 			line.b.x = x;
 			line.b.y = y;
 			state = 1;
-//			System.out.println("line state 0 -> 1");
-			break;
+			return false;
 		case 1:
 			line.b.x = x;
 			line.b.y = y;
 			state = 0;
-//			System.out.println("line state 1 -> 0");
-			break;
+			return true;
 		}
+		return false;
 	}
 
 	@Override

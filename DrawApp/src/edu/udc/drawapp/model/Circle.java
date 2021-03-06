@@ -17,4 +17,14 @@ public class Circle implements Shape {
 		return new CircleHandler(this);
 	}
 
+	@Override
+	public Circle clone() {
+		return new Circle(center.clone(), radius);
+	}
+
+	@Override
+	public String toString() {
+		return "Circle [center=" + center + ", radius=" + radius + "]";
+	}
+
 }

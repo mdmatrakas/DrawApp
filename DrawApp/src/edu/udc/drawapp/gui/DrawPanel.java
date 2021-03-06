@@ -8,15 +8,21 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.LinkedList;
+import java.util.List;
 
 public class DrawPanel extends JPanel {
 
 	private Shape shape;
+
+	private List<Shape> shapeList;
 	
 	/**
 	 * Create the panel.
 	 */
 	public DrawPanel() {
+		
+		shapeList = new LinkedList<Shape>();
 		
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -34,7 +40,10 @@ public class DrawPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {			
 				if(shape != null) {
-					shape.getHandler().mouseClick(e.getX(), e.getY());
+					if(shape.getHandler().mouseClick(e.getX(), e.getY())) {
+						shapeList.add(shape);
+						shape = shape.clone();
+					}
 					repaint();
 				}
 			}
@@ -51,6 +60,9 @@ public class DrawPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
+		for(Shape s: shapeList) {
+			s.getHandler().paint(g);
+		}
 		if(shape != null) {
 			shape.getHandler().paint(g);
 		}

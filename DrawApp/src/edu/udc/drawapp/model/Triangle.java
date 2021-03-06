@@ -19,4 +19,13 @@ public class Triangle implements Shape {
 		return new TriangleHandler(this);
 	}
 
+	@Override
+	public Triangle clone() {
+		return new Triangle(a.clone(), b.clone(), c.clone());
+	}
+
+	@Override
+	public String toString() {
+		return "Triangle [a=" + a + ", b=" + b + ", c=" + c + "]";
+	}
 }

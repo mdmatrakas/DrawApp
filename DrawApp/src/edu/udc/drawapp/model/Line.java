@@ -16,4 +16,14 @@ public class Line implements Shape {
 	public ShapeHandler getHandler() {
 		return new LineHandler(this);
 	}
+	
+	@Override
+	public Line clone() {
+		return new Line(a.clone(), b.clone());
+	}
+
+	@Override
+	public String toString() {
+		return "Line [a=" + a + ", b=" + b + "]";
+	}
 }

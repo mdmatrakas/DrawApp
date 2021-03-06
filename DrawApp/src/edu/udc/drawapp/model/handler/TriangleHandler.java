@@ -35,7 +35,7 @@ public class TriangleHandler implements ShapeHandler {
 	}
 
 	@Override
-	public void mouseClick(int x, int y) {
+	public boolean mouseClick(int x, int y) {
 		switch(state) {
 		case 0:
 			triangle.a.x = x;
@@ -45,18 +45,19 @@ public class TriangleHandler implements ShapeHandler {
 			triangle.c.x = x;
 			triangle.c.y = y;
 			state = 1;
-			break;
+			return false;
 		case 1:
 			triangle.b.x = x;
 			triangle.b.y = y;
 			state = 2;
-			break;
+			return false;
 		case 2:
 			triangle.c.x = x;
 			triangle.c.y = y;
 			state = 0;
-			break;
+			return true;
 		}
+		return false;
 	}
 
 	@Override

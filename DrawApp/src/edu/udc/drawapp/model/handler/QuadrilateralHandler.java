@@ -2,11 +2,11 @@ package edu.udc.drawapp.model.handler;
 
 import java.awt.Graphics;
 
-import edu.udc.drawapp.model.Rectangle;
+import edu.udc.drawapp.model.Quadrilateral;
 
-public class RectangleHandler implements ShapeHandler {
+public class QuadrilateralHandler implements ShapeHandler {
 
-	private Rectangle rectangle;
+	private Quadrilateral rectangle;
 	/*
 	 * Drawing state
 	 * 0 - not drawing
@@ -17,7 +17,7 @@ public class RectangleHandler implements ShapeHandler {
 	 */
 	private static int state;
 
-	public RectangleHandler(Rectangle rectangle) {
+	public QuadrilateralHandler(Quadrilateral rectangle) {
 		this.rectangle = rectangle;
 	}
 

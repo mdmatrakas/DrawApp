@@ -3,6 +3,7 @@ package edu.udc.drawapp.gui;
 import javax.swing.JPanel;
 
 import edu.udc.drawapp.model.*;
+import edu.udc.drawapp.persistence.ShapeFile;
 
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -70,6 +71,16 @@ public class DrawPanel extends JPanel {
 
 	public void desenharTipo(Shape shape) {
 		this.shape = shape;
+	}
+
+	public void lerArquivo(ShapeFile shapeFile) {
+		shapeList.clear();
+		shapeList = shapeFile.readFile();
+		repaint();
+	}
+
+	public void salvarArquivo(ShapeFile shapeFile) {
+		shapeFile.saveFile(shapeList);
 	}
 
 }

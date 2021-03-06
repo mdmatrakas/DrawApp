@@ -1,15 +1,15 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.RectangleHandler;
+import edu.udc.drawapp.model.handler.QuadrilateralHandler;
 import edu.udc.drawapp.model.handler.ShapeHandler;
 
-public class Rectangle implements Shape {
+public class Quadrilateral implements Shape {
 	public Point a;
 	public Point b;
 	public Point c;
 	public Point d;
 	
-	public Rectangle(Point a, Point b, Point c, Point d) {
+	public Quadrilateral(Point a, Point b, Point c, Point d) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
@@ -18,12 +18,12 @@ public class Rectangle implements Shape {
 
 	@Override
 	public ShapeHandler getHandler() {
-		return new RectangleHandler(this);
+		return new QuadrilateralHandler(this);
 	}
 
 	@Override
-	public Rectangle clone() {
-		return new Rectangle(a.clone(), b.clone(), c.clone(), d.clone());
+	public Quadrilateral clone() {
+		return new Quadrilateral(a.clone(), b.clone(), c.clone(), d.clone());
 	}
 
 	@Override

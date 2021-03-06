@@ -83,4 +83,9 @@ public class DrawPanel extends JPanel {
 		shapeFile.saveFile(shapeList);
 	}
 
+	public void novoArquivo() {
+		shapeList.clear();;
+		repaint();
+	}
+
 }

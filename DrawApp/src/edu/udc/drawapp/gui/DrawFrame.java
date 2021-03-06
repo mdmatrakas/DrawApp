@@ -104,6 +104,14 @@ public class DrawFrame extends JFrame {
 		mnGeometrias.add(mntmTriangle);
 		
 		
+		JMenuItem mntmNew = new JMenuItem("Novo");
+		mntmNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane.novoArquivo();
+			}
+		});
+		mnArquivos.add(mntmNew);
+		
 		JMenuItem mntmAbrir = new JMenuItem("Abrir");
 		mntmAbrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

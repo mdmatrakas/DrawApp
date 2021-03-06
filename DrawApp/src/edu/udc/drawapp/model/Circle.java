@@ -1,9 +1,15 @@
 package edu.udc.drawapp.model;
 
+import java.nio.ByteBuffer;
+
 import edu.udc.drawapp.model.handler.CircleHandler;
 import edu.udc.drawapp.model.handler.ShapeHandler;
 
 public class Circle implements Shape {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8522211607656722145L;
 	public Point center;
 	public float radius;
 	
@@ -24,7 +30,21 @@ public class Circle implements Shape {
 
 	@Override
 	public String toString() {
-		return "Circle [center=" + center + ", radius=" + radius + "]";
+		return Shape.CIRCLE_NAME + " " + center.x + "; "  + center.y + "; " + radius;
+	}
+
+	@Override
+	public byte[] toArray() {
+		byte[] bytes = new byte[12];
+		ByteBuffer.wrap(bytes,0,4).putFloat(center.x);
+	    ByteBuffer.wrap(bytes,4,4).putFloat(center.y);
+	    ByteBuffer.wrap(bytes,8,4).putFloat(radius);
+	    return bytes;
+	}
+
+	@Override
+	public int getIndex() {
+		return Shape.CIRCLE_IND;
 	}
 
 }

@@ -1,9 +1,15 @@
 package edu.udc.drawapp.model;
 
+import java.nio.ByteBuffer;
+
 import edu.udc.drawapp.model.handler.PointHandler;
 import edu.udc.drawapp.model.handler.ShapeHandler;
 
 public class Point implements Shape {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1813253821028017448L;
 	public float x;
 	public float y;
 	
@@ -33,6 +39,19 @@ public class Point implements Shape {
 
 	@Override
 	public String toString() {
-		return "Point [x=" + x + ", y=" + y + "]";
+		return Shape.POINT_NAME + " " + x + "; "  + y;
+	}
+	
+	@Override
+	public byte[] toArray() {
+		byte[] bytes = new byte[8];
+		ByteBuffer.wrap(bytes,0,4).putFloat(x);
+	    ByteBuffer.wrap(bytes,4,4).putFloat(y);
+	    return bytes;
+	}
+
+	@Override
+	public int getIndex() {
+		return Shape.POINT_IND;
 	}
 }

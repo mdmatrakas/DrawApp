@@ -1,7 +1,7 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.PointHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.PointHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public class Point implements Shape {
 	public float x;

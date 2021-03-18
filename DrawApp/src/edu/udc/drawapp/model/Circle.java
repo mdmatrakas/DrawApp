@@ -1,7 +1,7 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.CircleHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.CircleHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public class Circle implements Shape {
 	public Point center;

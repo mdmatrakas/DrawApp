@@ -1,7 +1,7 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.TriangleHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.TriangleHandler;
 
 public class Triangle implements Shape {
 	public Point a;

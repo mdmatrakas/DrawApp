@@ -1,7 +1,7 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.LineHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.LineHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public class Line implements Shape {
 	public Point a;

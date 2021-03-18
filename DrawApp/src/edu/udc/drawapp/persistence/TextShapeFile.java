@@ -1,6 +1,7 @@
 package edu.udc.drawapp.persistence;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.udc.drawapp.model.Shape;
@@ -24,7 +25,7 @@ public class TextShapeFile implements ShapeFile {
 	@Override
 	public List<Shape> readFile() {
 		// TODO Auto-generated method stub
-		return null;
+		return new LinkedList<Shape>();
 	}
 
 }

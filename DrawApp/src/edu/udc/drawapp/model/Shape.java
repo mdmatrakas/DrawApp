@@ -1,6 +1,6 @@
 package edu.udc.drawapp.model;
 
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public interface Shape {
 	

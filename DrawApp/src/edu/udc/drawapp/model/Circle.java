@@ -1,9 +1,11 @@
 package edu.udc.drawapp.model;
 
+
 import java.nio.ByteBuffer;
 
-import edu.udc.drawapp.model.handler.CircleHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.CircleHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
+
 
 public class Circle implements Shape {
 	/**

@@ -2,16 +2,11 @@ package edu.udc.drawapp.gui;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import edu.udc.drawapp.DrawApp;
 import edu.udc.drawapp.model.*;
-import edu.udc.drawapp.persistence.BinaryShapeFile;
-import edu.udc.drawapp.persistence.SerialShapeFile;
-import edu.udc.drawapp.persistence.ShapeFile;
-import edu.udc.drawapp.persistence.TextShapeFile;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -20,25 +15,11 @@ import java.io.File;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class DrawFrame extends JFrame {
 
 	private DrawPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					DrawFrame frame = new DrawFrame();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -50,6 +31,8 @@ public class DrawFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		DrawApp.getApp().getDocument().addObserver(contentPane);
 	
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -64,7 +47,7 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmPoint = new JMenuItem("Ponto");
 		mntmPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(new Point(-1, -1));
+				DrawApp.getApp().getDocument().drawShape( new Point(-1, -1) );
 			}
 		});
 		mnGeometrias.add(mntmPoint);
@@ -72,7 +55,9 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmLine = new JMenuItem("Linha");
 		mntmLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(new Line(new Point(-1, -1), new Point(-1, -1)));
+				DrawApp.getApp().getDocument().drawShape(
+						new Line(new Point(-1, -1), new Point(-1, -1))
+						);
 			}
 		});
 		mnGeometrias.add(mntmLine);
@@ -80,7 +65,9 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmCircle = new JMenuItem("Circulo");
 		mntmCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(new Circle(new Point(-1, -1), 0));
+				DrawApp.getApp().getDocument().drawShape(
+						new Circle(new Point(-1, -1), 0)
+						);
 			}
 		});
 		mnGeometrias.add(mntmCircle);
@@ -88,8 +75,11 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmRectangle = new JMenuItem("Retângulo");
 		mntmRectangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(new Quadrilateral(new Point(-1, -1), new Point(-1, -1), 
-						new Point(-1, -1), new Point(-1, -1)));
+				DrawApp.getApp().getDocument().drawShape(
+						new Quadrilateral(
+								new Point(-1, -1), new Point(-1, -1), 
+								new Point(-1, -1), new Point(-1, -1)
+						));
 			}
 		});
 		mnGeometrias.add(mntmRectangle);
@@ -97,8 +87,10 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmTriangle = new JMenuItem("Triângulo");
 		mntmTriangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.desenharTipo(new Triangle(new Point(-1, -1), new Point(-1, -1), 
-						new Point(-1, -1)));
+				DrawApp.getApp().getDocument().drawShape(
+						new Triangle(
+								new Point(-1, -1), new Point(-1, -1), new Point(-1, -1)
+						));
 			}
 		});
 		mnGeometrias.add(mntmTriangle);
@@ -107,7 +99,7 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmNew = new JMenuItem("Novo");
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.novoArquivo();
+				DrawApp.getApp().getDocument().novoArquivo();
 			}
 		});
 		mnArquivos.add(mntmNew);
@@ -115,11 +107,10 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmAbrir = new JMenuItem("Abrir");
 		mntmAbrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				File f = chooseFile(false);
-				if(f == null)
+				File file = chooseFile(false);
+				if(file == null)
 					return;
-				ShapeFile shapeFile = chooseFileType(f);
-				contentPane.lerArquivo(shapeFile);
+				DrawApp.getApp().getDocument().lerArquivo(file);
 			}
 		});
 		mnArquivos.add(mntmAbrir);
@@ -127,11 +118,10 @@ public class DrawFrame extends JFrame {
 		JMenuItem mntmSalvar = new JMenuItem("Salvar");
 		mntmSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				File f = chooseFile(true);
-				if(f == null)
+				File file = chooseFile(true);
+				if(file == null)
 					return;
-				ShapeFile shapeFile = chooseFileType(f);
-				contentPane.salvarArquivo(shapeFile);
+				DrawApp.getApp().getDocument().salvarArquivo(file);
 			}
 		});
 		mnArquivos.add(mntmSalvar);
@@ -156,21 +146,4 @@ public class DrawFrame extends JFrame {
 		}
 		return null;
 	}
-	
-	private ShapeFile chooseFileType(File f) {
-		ShapeFile file = null;
-		
-		String name = f.getName();
-		String ext = name.substring(name.lastIndexOf('.') + 1);
-		
-		if(ext.compareTo("ser") == 0) 
-			file = new SerialShapeFile(f);
-		if(ext.compareTo("txt") == 0) 
-			file = new TextShapeFile(f);
-		if(ext.compareTo("bin") == 0) 
-			file = new BinaryShapeFile(f);	
-		
-		return file;
-	}
-	
 }

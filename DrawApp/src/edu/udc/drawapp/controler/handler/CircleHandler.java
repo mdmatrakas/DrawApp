@@ -1,4 +1,4 @@
-package edu.udc.drawapp.model.handler;
+package edu.udc.drawapp.controler.handler;
 
 import java.awt.Graphics;
 

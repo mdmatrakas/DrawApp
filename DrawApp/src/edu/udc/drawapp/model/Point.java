@@ -1,9 +1,10 @@
 package edu.udc.drawapp.model;
 
+
 import java.nio.ByteBuffer;
 
-import edu.udc.drawapp.model.handler.PointHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.PointHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public class Point implements Shape {
 	/**

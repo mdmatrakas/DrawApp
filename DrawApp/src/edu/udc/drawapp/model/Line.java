@@ -1,9 +1,11 @@
 package edu.udc.drawapp.model;
 
+
 import java.nio.ByteBuffer;
 
-import edu.udc.drawapp.model.handler.LineHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.LineHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
+
 
 public class Line implements Shape {
 	/**

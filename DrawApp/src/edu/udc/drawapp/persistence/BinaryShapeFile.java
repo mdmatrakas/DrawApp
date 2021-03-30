@@ -69,7 +69,8 @@ public class BinaryShapeFile extends ShapeFile {
 				array = new byte[ByteBuffer.wrap(tam).getInt()];
 				input.read(array);
 				shape = ShapeFactory(array);
-				list.add(shape);
+				if(shape != null)
+					list.add(shape);
 			}
 			input.close();
 		} catch (EOFException endOfFileException) { // fim do arquivo foi alcançado
@@ -117,6 +118,7 @@ public class BinaryShapeFile extends ShapeFile {
 
 	// Metodo FactoryMethod() da classe ConcreteCreator do padrão Factory Method
 	public static Point PointFactory(byte bytes[]) {
+		if(bytes.length != 8) return null;
 		float x = ByteBuffer.wrap(bytes, 0, 4).getFloat();
 		float y = ByteBuffer.wrap(bytes, 4, 4).getFloat();
 		return new Point(x, y);
@@ -124,6 +126,7 @@ public class BinaryShapeFile extends ShapeFile {
 
 	// Metodo FactoryMethod() da classe ConcreteCreator do padrão Factory Method
 	public static Quadrilateral QuadrilateralFactory(byte bytes[]) {
+		if(bytes.length != 32) return null;
 		float x = ByteBuffer.wrap(bytes, 0, 4).getFloat();
 		float y = ByteBuffer.wrap(bytes, 4, 4).getFloat();
 		Point p1 = new Point(x, y);
@@ -141,6 +144,7 @@ public class BinaryShapeFile extends ShapeFile {
 
 	// Metodo FactoryMethod() da classe ConcreteCreator do padrão Factory Method
 	public static Line LineFactory(byte bytes[]) {
+		if(bytes.length != 16) return null;
 		float ax = ByteBuffer.wrap(bytes, 0, 4).getFloat();
 		float ay = ByteBuffer.wrap(bytes, 4, 4).getFloat();
 		float bx = ByteBuffer.wrap(bytes, 8, 4).getFloat();
@@ -150,6 +154,7 @@ public class BinaryShapeFile extends ShapeFile {
 
 	// Metodo FactoryMethod() da classe ConcreteCreator do padrão Factory Method
 	public static Circle CircleFactory(byte bytes[]) {
+		if(bytes.length != 12) return null;
 		float ax = ByteBuffer.wrap(bytes, 0, 4).getFloat();
 		float ay = ByteBuffer.wrap(bytes, 4, 4).getFloat();
 		float r = ByteBuffer.wrap(bytes, 8, 4).getFloat();
@@ -158,6 +163,7 @@ public class BinaryShapeFile extends ShapeFile {
 
 	// Metodo FactoryMethod() da classe ConcreteCreator do padrão Factory Method
 	public static Triangle TriangleFactory(byte bytes[]) {
+		if(bytes.length != 24) return null;
 		float x = ByteBuffer.wrap(bytes, 0, 4).getFloat();
 		float y = ByteBuffer.wrap(bytes, 4, 4).getFloat();
 		Point p1 = new Point(x, y);

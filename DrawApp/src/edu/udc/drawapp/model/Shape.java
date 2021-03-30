@@ -1,8 +1,9 @@
 package edu.udc.drawapp.model;
 
+
 import java.io.Serializable;
 
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public interface Shape extends Serializable {
 	

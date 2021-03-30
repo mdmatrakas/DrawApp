@@ -2,28 +2,23 @@ package edu.udc.drawapp.gui;
 
 import javax.swing.JPanel;
 
+import edu.udc.drawapp.DrawApp;
 import edu.udc.drawapp.model.*;
-import edu.udc.drawapp.persistence.ShapeFile;
-
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ListIterator;
 
-public class DrawPanel extends JPanel {
-
-	private Shape shape;
-
-	private List<Shape> shapeList;
+public class DrawPanel extends JPanel implements DrawView {
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Create the panel.
 	 */
 	public DrawPanel() {
 		
-		shapeList = new LinkedList<Shape>();
+		
 		
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -31,6 +26,7 @@ public class DrawPanel extends JPanel {
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				Shape shape = DrawApp.getApp().getDocument().getDrwingShape();
 				if(shape != null) {
 					shape.getHandler().mouseMove(e.getX(), e.getY());
 					repaint();
@@ -39,13 +35,12 @@ public class DrawPanel extends JPanel {
 		});
 		addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {			
+			public void mouseClicked(MouseEvent e) {	
+				Shape shape = DrawApp.getApp().getDocument().getDrwingShape();
 				if(shape != null) {
 					if(shape.getHandler().mouseClick(e.getX(), e.getY())) {
-						shapeList.add(shape);
-						shape = shape.clone();
+						DrawApp.getApp().getDocument().endDrawing();
 					}
-					repaint();
 				}
 			}
 			@Override
@@ -61,30 +56,18 @@ public class DrawPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		for(Shape s: shapeList) {
-			s.getHandler().paint(g);
+		ListIterator<Shape> it = DrawApp.getApp().getDocument().getShapeIterator();
+		while(it.hasNext()) {
+			it.next().getHandler().paint(g);
 		}
+		Shape shape = DrawApp.getApp().getDocument().getDrwingShape();
 		if(shape != null) {
 			shape.getHandler().paint(g);
 		}
 	}
 
-	public void desenharTipo(Shape shape) {
-		this.shape = shape;
-	}
-
-	public void lerArquivo(ShapeFile shapeFile) {
-		shapeList.clear();
-		shapeList = shapeFile.readFile();
-		repaint();
-	}
-
-	public void salvarArquivo(ShapeFile shapeFile) {
-		shapeFile.saveFile(shapeList);
-	}
-
-	public void novoArquivo() {
-		shapeList.clear();;
+	@Override
+	public void update() {
 		repaint();
 	}
 

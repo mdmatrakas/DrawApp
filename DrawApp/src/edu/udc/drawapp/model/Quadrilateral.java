@@ -1,9 +1,10 @@
 package edu.udc.drawapp.model;
 
+
 import java.nio.ByteBuffer;
 
-import edu.udc.drawapp.model.handler.QuadrilateralHandler;
-import edu.udc.drawapp.model.handler.ShapeHandler;
+import edu.udc.drawapp.controler.handler.QuadrilateralHandler;
+import edu.udc.drawapp.controler.handler.ShapeHandler;
 
 public class Quadrilateral implements Shape {
 	/**
